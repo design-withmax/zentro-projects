@@ -1,0 +1,20 @@
+# Source maps
+*.css.map
+
+# Sass source (compiled CSS is committed)
+assets/sass/
+
+# OS files
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+
+# Node (used only during Docker build)
+node_modules/
+
+# Logs
+*.log
