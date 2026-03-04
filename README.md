@@ -57,9 +57,10 @@ zentro/
 │   ├── img/           # Images, icons, favicons
 │   └── js/            # JavaScript (jQuery, plugins, main.js)
 ├── *.html             # All website pages
-├── mail.php           # Contact form handler
+├── mail.php           # Contact form handler (PHP)
 ├── Dockerfile         # Multi-stage production build
 ├── nginx.conf         # Nginx server configuration
+├── ssmtp.conf.example # SMTP config template
 ├── .gitignore         # Git exclusions
 ├── .dockerignore      # Docker build exclusions
 ├── LICENSE            # Proprietary license
@@ -104,7 +105,48 @@ Visit `http://localhost:8080` in your browser.
 1. **Minifies CSS** — Reduces `style.css` (~625KB) using `clean-css`
 2. **Minifies JS** — Compresses `main.js` using `uglify-js`
 3. **Minifies HTML** — Strips comments and whitespace from all pages
-4. **Serves via Nginx** — Gzip, caching headers, security headers
+4. **Serves via Nginx + PHP-FPM** — Gzip, caching headers, security headers, PHP email support
+
+## Email / SMTP Configuration
+
+The contact form (`mail.php`) uses PHP's `mail()` function. In Docker, emails are sent via **ssmtp** — a lightweight SMTP relay.
+
+### Setup Steps
+
+1. Copy the example config:
+   ```bash
+   cp ssmtp.conf.example ssmtp.conf
+   ```
+
+2. Edit `ssmtp.conf` with your SMTP provider's credentials:
+   ```
+   mailhub=smtp.yourprovider.com:587
+   UseTLS=YES
+   UseSTARTTLS=YES
+   AuthUser=your-email@zentro.co.za
+   AuthPass=your-smtp-password
+   rewriteDomain=zentro.co.za
+   hostname=zentro.co.za
+   FromLineOverride=YES
+   ```
+
+3. Mount the config when running the container:
+   ```bash
+   docker run -d -p 8080:80 \
+     -v $(pwd)/ssmtp.conf:/etc/ssmtp/ssmtp.conf:ro \
+     --name zentro zentro-projects
+   ```
+
+### Common SMTP Providers
+
+| Provider | Mail Hub | Port |
+|---|---|---|
+| Gmail | `smtp.gmail.com` | `587` |
+| SendGrid | `smtp.sendgrid.net` | `587` |
+| Outlook/365 | `smtp.office365.com` | `587` |
+| Custom (hosting) | Check with your provider | Usually `587` or `465` |
+
+> **Note:** For Gmail, you'll need an [App Password](https://support.google.com/accounts/answer/185833). For SendGrid, use your API key as the password.
 
 ## Deployment (Coolify)
 

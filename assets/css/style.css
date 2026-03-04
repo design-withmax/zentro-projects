@@ -7498,6 +7498,17 @@ ol.wp-block-rss {
   color: var(--theme-color);
 }
 
+.header-layout-default .header-logo img {
+  max-height: 80px;
+  width: auto;
+}
+
+@media (max-width: 991px) {
+  .header-layout-default .header-logo img {
+    max-height: 70px;
+  }
+}
+
 .header-layout-default .menu-area {
   background-color: var(--white-color);
   position: relative;

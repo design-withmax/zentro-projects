@@ -1,0 +1,24 @@
+# SMTP Configuration (ssmtp)
+#
+# This file should be placed at /etc/ssmtp/ssmtp.conf inside the Docker container.
+# You can mount it as a volume or copy it during build.
+#
+# Replace the values below with your SMTP provider's credentials.
+
+# The mail server to send through
+mailhub=smtp.example.com:587
+
+# Use TLS/SSL
+UseTLS=YES
+UseSTARTTLS=YES
+
+# SMTP authentication
+AuthUser=your-email@example.com
+AuthPass=your-smtp-password
+
+# The "From" domain
+rewriteDomain=zentro.co.za
+hostname=zentro.co.za
+
+# Allow the "From" header to be overridden
+FromLineOverride=YES
