@@ -65,12 +65,12 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Remove default Nginx page
 RUN rm -f /usr/share/nginx/html/50x.html
 
-# Create startup script
-RUN printf '#!/bin/sh\nphp-fpm83\nnginx -g "daemon off;"\n' > /start.sh && chmod +x /start.sh
+# Create startup script (php-fpm daemonizes by default, nginx runs foreground)
+RUN echo '#!/bin/sh' > /start.sh && \
+  echo 'php-fpm83' >> /start.sh && \
+  echo 'exec nginx -g "daemon off;"' >> /start.sh && \
+  chmod +x /start.sh
 
 EXPOSE 80
-
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD wget -qO- http://localhost/ || exit 1
 
 CMD ["/start.sh"]
