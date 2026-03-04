@@ -12,19 +12,19 @@ COPY . .
 
 # Install minification tools and optimize
 RUN npm init -y > /dev/null 2>&1 && \
-  npm install --save-dev clean-css-cli uglify-js html-minifier-cli > /dev/null 2>&1
+  npm install --save-dev clean-css-cli uglify-js html-minifier-terser > /dev/null 2>&1
 
 # Minify CSS
-RUN npx cleancss -o assets/css/style.min.css assets/css/style.css && \
+RUN ./node_modules/.bin/cleancss -o assets/css/style.min.css assets/css/style.css && \
   mv assets/css/style.min.css assets/css/style.css
 
 # Minify main.js (other JS files are already minified)
-RUN npx uglifyjs assets/js/main.js -o assets/js/main.min.js -c -m && \
+RUN ./node_modules/.bin/uglifyjs assets/js/main.js -o assets/js/main.min.js -c -m && \
   mv assets/js/main.min.js assets/js/main.js
 
 # Minify all HTML files
 RUN for f in *.html; do \
-  npx html-minifier \
+  ./node_modules/.bin/html-minifier-terser \
   --collapse-whitespace \
   --remove-comments \
   --remove-redundant-attributes \
