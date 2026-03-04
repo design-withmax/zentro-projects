@@ -71,6 +71,6 @@ RUN echo '#!/bin/sh' > /start.sh && \
   echo 'exec nginx -g "daemon off;"' >> /start.sh && \
   chmod +x /start.sh
 
-EXPOSE 80
+EXPOSE 3000
 
 CMD ["/start.sh"]
