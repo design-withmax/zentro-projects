@@ -7575,6 +7575,12 @@ ol.wp-block-rss {
   }
 }
 
+@media (max-width: 991px) {
+  .header-layout-default .menu-area .logo-bg {
+    display: none;
+  }
+}
+
 .header-layout-default .main-menu>ul>li>a {
   padding: 31.5px 0;
 }
