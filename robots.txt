@@ -1,0 +1,46 @@
+# https://www.robotstxt.org/robotstxt.html
+
+# ── Allow all search engines ──────────────────────────────────────────────────
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /assets/css/
+Disallow: /assets/js/
+Disallow: /assets/sass/
+Disallow: /assets/fonts/
+
+# Sitemaps
+Sitemap: https://www.zentro.co.za/sitemap.xml
+
+# ── AI / LLM crawlers (opt-in via llms.txt) ──────────────────────────────────
+# See https://llmstxt.org/
+User-agent: GPTBot
+Allow: /llms.txt
+Disallow: /
+
+User-agent: ChatGPT-User
+Allow: /llms.txt
+Disallow: /
+
+User-agent: Google-Extended
+Allow: /llms.txt
+Disallow: /
+
+User-agent: anthropic-ai
+Allow: /llms.txt
+Disallow: /
+
+User-agent: ClaudeBot
+Allow: /llms.txt
+Disallow: /
+
+User-agent: CCBot
+Allow: /llms.txt
+Disallow: /
+
+User-agent: PerplexityBot
+Allow: /llms.txt
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
