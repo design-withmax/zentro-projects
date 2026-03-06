@@ -185,7 +185,7 @@ development → staging → main
 ## Credits
 
 - **Client**: Zentro Projects (Pty) Ltd.
-- **Design & Development**: [MTJ Digital](https://www.mtj-digital.co.za)
+- **Design & Development**: [MTJ Digital](https://mtj-digital.co.za)
 
 ## License
 
